@@ -10,9 +10,23 @@ public class ResolutionCalculator {
 
     public static void main(String[] args) {
         final ArrayList<Clause> knf = new ArrayList<>();
+        /* is satisfiable
         knf.add(new Clause(new Literal("A", false)));
         knf.add(new Clause(new Literal("A", true), new Literal("B", false)));
         knf.add(new Clause(new Literal("B", true)));
+*/
+        /* is satisfiable
+        knf.add(new Clause(new Literal("A", false)));
+        knf.add(new Clause(new Literal("A", true)));
+*/
+        /* is satisfiable
+
+         */
+        knf.add(new Clause(new Literal("A", true), new Literal("B", false)));
+        knf.add(new Clause(new Literal("B", true), new Literal("A", false)));
+        knf.add(new Clause(new Literal("A", true), new Literal("C", true)));
+        knf.add(new Clause(new Literal("B", false)));
+        knf.add(new Clause(new Literal("C", false)));
 
         if (knf.isEmpty()) {
             System.err.println("KNF without clauses are always false!");
@@ -39,8 +53,14 @@ public class ResolutionCalculator {
                 for (int j = 1; j < resolvent.size(); j++) {
                     final Clause clause1 = resolvent.get(i);
                     final Clause clause2 = resolvent.get(j);
+                    System.out.println("\nLooking for clauses:");
+                    clause1.printClause();
+                    clause2.printClause();
                     if (isResolvable(clause1.getLiterals(), clause2.getLiterals())) {
+                        System.out.println("\nThe clauses are resolvable!");
                         final Clause resolve = resolve(clause1, clause2);
+                        System.out.println("\nNew clause: ");
+                        resolve.printClause();
                         resolvent.remove(clause1);
                         resolvent.remove(clause2);
                         resolvent.add(resolve);
@@ -52,14 +72,8 @@ public class ResolutionCalculator {
         return resolvent.stream().anyMatch(Clause::isEmpty);
     }
 
-    private static int isContains(ArrayList<Clause> knf, ArrayList<Clause> resolvent) {
-        int found = 0;
-        for (Clause clause : resolvent) {
-            if (knf.contains(clause)) {
-                found++;
-            }
-        }
-        return found;
+    private static long isContains(ArrayList<Clause> knf, ArrayList<Clause> resolvent) {
+        return resolvent.stream().filter(knf::contains).count();
     }
 
     public static Clause resolve(Clause clause1, Clause clause2) {

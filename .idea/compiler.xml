@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ResolutionCalculator" />
+        <module name="Resolution" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Resolution" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>

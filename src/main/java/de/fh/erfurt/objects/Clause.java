@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Getter
 public class Clause {
@@ -14,11 +15,19 @@ public class Clause {
         this.literals = Arrays.stream(literals).toList();
     }
 
-    public Clause(ArrayList<Literal> literals){
+    public Clause(ArrayList<Literal> literals) {
         this.literals = literals;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return this.literals.isEmpty();
+    }
+
+    public void printClause() {
+        StringJoiner literalsString = new StringJoiner(", ");
+        literals.forEach(literal -> {
+            literalsString.add((literal.isNegativ() ? "¬" : "") + literal.getName());
+        });
+        System.out.print("{" + literalsString.toString() + "}");
     }
 }
