@@ -40,7 +40,7 @@ public class ResolutionCalculator {
         if (result) {
             System.out.println("\nThe formula is satisfiable.");
         } else {
-            System.out.println("\nThe formula is not satisfiable.");
+            System.out.println("\nThe formula is unsatisfiable.");
         }
 
     }
