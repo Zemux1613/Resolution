@@ -38,9 +38,9 @@ public class ResolutionCalculator {
 
         // Print the result
         if (result) {
-            System.out.println("The formula is satisfiable.");
+            System.out.println("\nThe formula is satisfiable.");
         } else {
-            System.out.println("The formula is not satisfiable.");
+            System.out.println("\nThe formula is not satisfiable.");
         }
 
     }
@@ -57,9 +57,9 @@ public class ResolutionCalculator {
                     clause1.printClause();
                     clause2.printClause();
                     if (isResolvable(clause1.getLiterals(), clause2.getLiterals())) {
-                        System.out.println("\nThe clauses are resolvable!");
+                        System.out.println("The clauses are resolvable!");
                         final Clause resolve = resolve(clause1, clause2);
-                        System.out.println("\nNew clause: ");
+                        System.out.println("New clause:");
                         resolve.printClause();
                         resolvent.remove(clause1);
                         resolvent.remove(clause2);
@@ -87,12 +87,11 @@ public class ResolutionCalculator {
                 final Literal literal1 = literals.get(i);
                 final Literal literal2 = literals.get(j);
 
-                if (literal1.getName().equals(literal2.getName()) && literal1.isNegativ() == !literal2.isNegativ()) {
+                if (literal1.name().equals(literal2.name()) && literal1.negativ() == !literal2.negativ()) {
                     literals.remove(literal1);
                     literals.remove(literal2);
                     break;
                 }
-
             }
         }
 
@@ -101,9 +100,9 @@ public class ResolutionCalculator {
 
     public static boolean isResolvable(List<Literal> clause1, List<Literal> clause2) {
         // Check if the clauses have a complementary literal
-        for (Literal literal1 : clause1) {
-            for (Literal literal2 : clause2) {
-                if (literal1.isNegativ() == !literal2.isNegativ()) {
+        for (final Literal literal1 : clause1) {
+            for (final Literal literal2 : clause2) {
+                if (literal1.negativ() == !literal2.negativ() && literal1.name().equals(literal2.name())) {
                     return true;
                 }
             }

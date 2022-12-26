@@ -26,8 +26,8 @@ public class Clause {
     public void printClause() {
         StringJoiner literalsString = new StringJoiner(", ");
         literals.forEach(literal -> {
-            literalsString.add((literal.isNegativ() ? "¬" : "") + literal.getName());
+            literalsString.add((literal.negativ() ? "¬" : "") + literal.name());
         });
-        System.out.print("{" + literalsString.toString() + "}");
+        System.out.println("{" + literalsString.toString() + "}");
     }
 }
